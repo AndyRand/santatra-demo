@@ -17,9 +17,3 @@ model User {
   password  String
   roles     String[]
 }
-
-model Customer {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
-}
