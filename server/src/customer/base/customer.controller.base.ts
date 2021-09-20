@@ -55,11 +55,25 @@ export class CustomerControllerBase {
       );
     }
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        userRelated: data.userRelated
+          ? {
+              connect: data.userRelated,
+            }
+          : undefined,
+      },
       select: {
-        createdAt: true,
         id: true,
+        createdAt: true,
         updatedAt: true,
+
+        userRelated: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -94,9 +108,15 @@ export class CustomerControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
-        createdAt: true,
         id: true,
+        createdAt: true,
         updatedAt: true,
+
+        userRelated: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     return results.map((result) => permission.filter(result));
@@ -126,9 +146,15 @@ export class CustomerControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        createdAt: true,
         id: true,
+        createdAt: true,
         updatedAt: true,
+
+        userRelated: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -177,11 +203,25 @@ export class CustomerControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          userRelated: data.userRelated
+            ? {
+                connect: data.userRelated,
+              }
+            : undefined,
+        },
         select: {
-          createdAt: true,
           id: true,
+          createdAt: true,
           updatedAt: true,
+
+          userRelated: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -212,9 +252,15 @@ export class CustomerControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          createdAt: true,
           id: true,
+          createdAt: true,
           updatedAt: true,
+
+          userRelated: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
