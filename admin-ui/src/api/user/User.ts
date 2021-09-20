@@ -1,3 +1,5 @@
+import { Customer } from "../customer/Customer";
+
 export type User = {
   id: string;
   createdAt: Date;
@@ -6,4 +8,5 @@ export type User = {
   lastName: string | null;
   username: string;
   roles: Array<string>;
+  customers?: Array<Customer>;
 };
